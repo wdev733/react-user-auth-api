@@ -1,0 +1,140 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Amusingly SuperAdmain",
+    "description": "REST APIs for Amusingly SuperAdmin",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "/api",
+      "description": "REST APIs"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Authentication",
+      "description": "API for Authentication"
+    },
+    {
+      "name": "Admin",
+      "description": "API for Admin"
+    },
+    {
+      "name": "Customer",
+      "description": "API for Customer"
+    },
+    {
+      "name": "Instagram",
+      "description": "API for Customer's Instagram"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/account/login": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Login to SuperAdmin, Retrieve Admin info and access token",
+        "requestBody": {
+          "description": "Username and Password",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              },
+              "examples": {
+                "Test Crendential": {
+                  "value": {
+                    "username": "admin",
+                    "password": "AmNcus100c!"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Admin"
+            }
+          }
+        }
+      }
+    },
+    "/admin/list": {
+      "get": {
+        "security": {
+          "OAuth2": {
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjEsImlhdCI6MTU3MDIxMjcxNH0.wRoYM5p8RFTR-jEMyY1DhWJlOGe3TgVwfsbnf_K0Izk"
+          }
+        },
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Retrives all Admin",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Admin"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Admin": {
+      "type": "object",
+      "properties": {
+        "AdminID": {
+          "type": "number"
+        },
+        "UserName": {
+          "type": "string"
+        },
+        "Password": {
+          "type": "string"
+        },
+        "FirstName": {
+          "type": "string"
+        },
+        "LastName": {
+          "type": "string"
+        },
+        "Email": {
+          "type": "string"
+        },
+        "LastLogin": {
+          "type": "string"
+        },
+        "Status": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}
