@@ -12,7 +12,7 @@ const server = http.createServer(app);
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get('/', async (req, res) => {
-  res.send('<h2>Amusingly</h2>');
+  res.send('<h2>User Authentication Test Service</h2>');
 });
 
 setImmediate(() => {
